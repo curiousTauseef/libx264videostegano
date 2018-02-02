@@ -2732,6 +2732,7 @@ static int init_output_stream(OutputStream *ost, char *error, int error_len)
             *message = x4->params.message;
             x4->params.message->width = x4->params.i_width;
             x4->params.message->height = x4->params.i_height;
+            x4->params.message->cursor = 0;
             initializedMessage=1;
         }
         if (ost->enc->type == AVMEDIA_TYPE_AUDIO &&

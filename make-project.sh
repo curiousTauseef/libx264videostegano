@@ -1,4 +1,4 @@
-!#/bin/bash
+#!/bin/bash
 echo building and installing libx264
 cd libx264
 ./configure --enable-shared --prefix=. --disable-asm --disable-thread
