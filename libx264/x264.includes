@@ -1,0 +1,14 @@
+.
+common
+common/aarch64
+common/arm
+common/mips
+common/opencl
+common/ppc
+common/x86
+encoder
+extras
+filters
+filters/video
+input
+output
