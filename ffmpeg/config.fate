@@ -1,0 +1,1 @@
+config:x86:x86_64:generic:linux:gcc 5.4.0 (Ubuntu 5.4.0-6ubuntu1~16.04.6) 20160609:--prefix=. --enable-shared --extra-cflags='-gstabs+ -I../libx264' --extra-ldflags=-L../libx264/lib --enable-ffplay --enable-libx264 --enable-gpl --enable-pic --disable-yasm --disable-pthreads
