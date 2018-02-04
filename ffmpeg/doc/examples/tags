@@ -1,0 +1,223 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+AUDIO_INBUF_SIZE	decoding_encoding.c	44;"	d	file:
+AUDIO_REFILL_THRESH	decoding_encoding.c	45;"	d	file:
+AVCodecInitialize	decoder_targeted.c	/^static AVCodec *AVCodecInitialize(enum AVCodecID codec_id)$/;"	f	file:
+CFLAGS	Makefile	/^CFLAGS := $(shell pkg-config --cflags $(FFMPEG_LIBS)) $(CFLAGS)$/;"	m
+DecodeContext	qsvdec.c	/^typedef struct DecodeContext {$/;"	s	file:
+DecodeContext	qsvdec.c	/^} DecodeContext;$/;"	t	typeref:struct:DecodeContext	file:
+EXAMPLES	Makefile	/^EXAMPLES=       avio_dir_cmd                       \\$/;"	m
+FDBCreate	decoder_targeted.c	/^void FDBCreate(FuzzDataBuffer *FDB) {$/;"	f
+FDBDesroy	decoder_targeted.c	/^void FDBDesroy(FuzzDataBuffer *FDB) { av_free(FDB->data_); }$/;"	f
+FDBPrepare	decoder_targeted.c	/^void FDBPrepare(FuzzDataBuffer *FDB, AVPacket *dst, const uint8_t *data,$/;"	f
+FDBRealloc	decoder_targeted.c	/^void FDBRealloc(FuzzDataBuffer *FDB, size_t size) {$/;"	f
+FFMPEG_LIBS	Makefile	/^FFMPEG_LIBS=    libavdevice                        \\$/;"	m
+FRAME_SIZE	filter_audio.c	246;"	d	file:
+FUZZ_TAG	decoder_targeted.c	/^static const uint64_t FUZZ_TAG = 0x4741542D5A5A5546ULL;$/;"	v	file:
+FilteringContext	transcoding.c	/^typedef struct FilteringContext {$/;"	s	file:
+FilteringContext	transcoding.c	/^} FilteringContext;$/;"	t	typeref:struct:FilteringContext	file:
+FuzzDataBuffer	decoder_targeted.c	/^typedef struct FuzzDataBuffer {$/;"	s	file:
+FuzzDataBuffer	decoder_targeted.c	/^} FuzzDataBuffer;$/;"	t	typeref:struct:FuzzDataBuffer	file:
+INBUF_SIZE	decoding_encoding.c	43;"	d	file:
+INPUT_CHANNEL_LAYOUT	filter_audio.c	58;"	d	file:
+INPUT_FORMAT	filter_audio.c	57;"	d	file:
+INPUT_SAMPLERATE	filter_audio.c	56;"	d	file:
+LDLIBS	Makefile	/^LDLIBS := $(shell pkg-config --libs $(FFMPEG_LIBS)) $(LDLIBS)$/;"	m
+LLVMFuzzerTestOneInput	decoder_targeted.c	/^int LLVMFuzzerTestOneInput(const uint8_t *data, size_t size) {$/;"	f
+OBJS	Makefile	/^OBJS=$(addsuffix .o,$(EXAMPLES))$/;"	m
+OUTPUT_BIT_RATE	transcode_aac.c	44;"	d	file:
+OUTPUT_CHANNELS	transcode_aac.c	46;"	d	file:
+OutputStream	muxing.c	/^typedef struct OutputStream {$/;"	s	file:
+OutputStream	muxing.c	/^} OutputStream;$/;"	t	typeref:struct:OutputStream	file:
+SCALE_FLAGS	muxing.c	50;"	d	file:
+STREAM_DURATION	muxing.c	46;"	d	file:
+STREAM_FRAME_RATE	muxing.c	47;"	d	file:
+STREAM_PIX_FMT	muxing.c	48;"	d	file:
+VOLUME_VAL	filter_audio.c	60;"	d	file:
+_XOPEN_SOURCE	filtering_video.c	30;"	d	file:
+add_samples_to_fifo	transcode_aac.c	/^static int add_samples_to_fifo(AVAudioFifo *fifo,$/;"	f	file:
+add_stream	muxing.c	/^static void add_stream(OutputStream *ost, AVFormatContext *oc,$/;"	f	file:
+alloc_audio_frame	muxing.c	/^static AVFrame *alloc_audio_frame(enum AVSampleFormat sample_fmt,$/;"	f	file:
+alloc_picture	muxing.c	/^static AVFrame *alloc_picture(enum AVPixelFormat pix_fmt, int width, int height)$/;"	f	file:
+audio_dec_ctx	demuxing_decoding.c	/^static AVCodecContext *video_dec_ctx = NULL, *audio_dec_ctx;$/;"	v	file:
+audio_decode_example	decoding_encoding.c	/^static void audio_decode_example(const char *outfilename, const char *filename)$/;"	f	file:
+audio_dst_file	demuxing_decoding.c	/^static FILE *audio_dst_file = NULL;$/;"	v	file:
+audio_dst_filename	demuxing_decoding.c	/^static const char *audio_dst_filename = NULL;$/;"	v	file:
+audio_encode_example	decoding_encoding.c	/^static void audio_encode_example(const char *filename)$/;"	f	file:
+audio_frame_count	demuxing_decoding.c	/^static int audio_frame_count = 0;$/;"	v	file:
+audio_stream	demuxing_decoding.c	/^static AVStream *video_stream = NULL, *audio_stream = NULL;$/;"	v	file:
+audio_stream_idx	demuxing_decoding.c	/^static int video_stream_idx = -1, audio_stream_idx = -1;$/;"	v	file:
+audio_stream_index	filtering_audio.c	/^static int audio_stream_index = -1;$/;"	v	file:
+buffer_data	avio_reading.c	/^struct buffer_data {$/;"	s	file:
+buffersink_ctx	filtering_audio.c	/^AVFilterContext *buffersink_ctx;$/;"	v
+buffersink_ctx	filtering_video.c	/^AVFilterContext *buffersink_ctx;$/;"	v
+buffersink_ctx	transcoding.c	/^    AVFilterContext *buffersink_ctx;$/;"	m	struct:FilteringContext	file:
+buffersrc_ctx	filtering_audio.c	/^AVFilterContext *buffersrc_ctx;$/;"	v
+buffersrc_ctx	filtering_video.c	/^AVFilterContext *buffersrc_ctx;$/;"	v
+buffersrc_ctx	transcoding.c	/^    AVFilterContext *buffersrc_ctx;$/;"	m	struct:FilteringContext	file:
+c	decoder_targeted.c	/^static AVCodec *c = NULL;$/;"	v	file:
+check_sample_fmt	decoding_encoding.c	/^static int check_sample_fmt(AVCodec *codec, enum AVSampleFormat sample_fmt)$/;"	f	file:
+close_stream	muxing.c	/^static void close_stream(AVFormatContext *oc, OutputStream *ost)$/;"	f	file:
+convert_samples	transcode_aac.c	/^static int convert_samples(const uint8_t **input_data,$/;"	f	file:
+data_	decoder_targeted.c	/^    uint8_t *data_;$/;"	m	struct:FuzzDataBuffer	file:
+dec_ctx	filtering_audio.c	/^static AVCodecContext *dec_ctx;$/;"	v	file:
+dec_ctx	filtering_video.c	/^static AVCodecContext *dec_ctx;$/;"	v	file:
+decode_audio_frame	transcode_aac.c	/^static int decode_audio_frame(AVFrame *frame,$/;"	f	file:
+decode_handler	decoder_targeted.c	72;"	d	file:
+decode_handler	decoder_targeted.c	74;"	d	file:
+decode_handler	decoder_targeted.c	86;"	d	file:
+decode_packet	demuxing_decoding.c	/^static int decode_packet(int *got_frame, int cached)$/;"	f	file:
+decode_packet	extract_mvs.c	/^static int decode_packet(int *got_frame, int cached)$/;"	f	file:
+decode_packet	qsvdec.c	/^static int decode_packet(DecodeContext *decode, AVCodecContext *decoder_ctx,$/;"	f	file:
+decode_write_frame	decoding_encoding.c	/^static int decode_write_frame(const char *outfilename, AVCodecContext *avctx,$/;"	f	file:
+del_op	avio_dir_cmd.c	/^static int del_op(const char *url)$/;"	f	file:
+display_frame	filtering_video.c	/^static void display_frame(const AVFrame *frame, AVRational time_base)$/;"	f	file:
+enc	muxing.c	/^    AVCodecContext *enc;$/;"	m	struct:OutputStream	file:
+encode_audio_frame	transcode_aac.c	/^static int encode_audio_frame(AVFrame *frame,$/;"	f	file:
+encode_write_frame	transcoding.c	/^static int encode_write_frame(AVFrame *filt_frame, unsigned int stream_index, int *got_frame) {$/;"	f	file:
+error	decoder_targeted.c	/^static void error(const char *err)$/;"	f	file:
+fill_samples	resampling_audio.c	/^static void fill_samples(double *dst, int nb_samples, int nb_channels, int sample_rate, double *t)$/;"	f	file:
+fill_yuv_image	muxing.c	/^static void fill_yuv_image(AVFrame *pict, int frame_index,$/;"	f	file:
+fill_yuv_image	scaling_video.c	/^static void fill_yuv_image(uint8_t *data[4], int linesize[4],$/;"	f	file:
+filter_ctx	transcoding.c	/^static FilteringContext *filter_ctx;$/;"	v	file:
+filter_descr	filtering_audio.c	/^static const char *filter_descr = "aresample=8000,aformat=sample_fmts=s16:channel_layouts=mono";$/;"	v	file:
+filter_descr	filtering_video.c	/^const char *filter_descr = "scale=78:24,transpose=cclock";$/;"	v
+filter_encode_write_frame	transcoding.c	/^static int filter_encode_write_frame(AVFrame *frame, unsigned int stream_index)$/;"	f	file:
+filter_graph	filtering_audio.c	/^AVFilterGraph *filter_graph;$/;"	v
+filter_graph	filtering_video.c	/^AVFilterGraph *filter_graph;$/;"	v
+filter_graph	transcoding.c	/^    AVFilterGraph *filter_graph;$/;"	m	struct:FilteringContext	file:
+flush_encoder	transcoding.c	/^static int flush_encoder(unsigned int stream_index)$/;"	f	file:
+fmt_ctx	demuxing_decoding.c	/^static AVFormatContext *fmt_ctx = NULL;$/;"	v	file:
+fmt_ctx	extract_mvs.c	/^static AVFormatContext *fmt_ctx = NULL;$/;"	v	file:
+fmt_ctx	filtering_audio.c	/^static AVFormatContext *fmt_ctx;$/;"	v	file:
+fmt_ctx	filtering_video.c	/^static AVFormatContext *fmt_ctx;$/;"	v	file:
+frame	demuxing_decoding.c	/^static AVFrame *frame = NULL;$/;"	v	file:
+frame	extract_mvs.c	/^static AVFrame *frame = NULL;$/;"	v	file:
+frame	muxing.c	/^    AVFrame *frame;$/;"	m	struct:OutputStream	file:
+frame_alloc	qsvdec.c	/^static mfxStatus frame_alloc(mfxHDL pthis, mfxFrameAllocRequest *req,$/;"	f	file:
+frame_free	qsvdec.c	/^static mfxStatus frame_free(mfxHDL pthis, mfxFrameAllocResponse *resp)$/;"	f	file:
+frame_get_hdl	qsvdec.c	/^static mfxStatus frame_get_hdl(mfxHDL pthis, mfxMemId mid, mfxHDL *hdl)$/;"	f	file:
+frame_info	qsvdec.c	/^    mfxFrameInfo frame_info;$/;"	m	struct:DecodeContext	file:
+frame_lock	qsvdec.c	/^static mfxStatus frame_lock(mfxHDL pthis, mfxMemId mid, mfxFrameData *ptr)$/;"	f	file:
+frame_unlock	qsvdec.c	/^static mfxStatus frame_unlock(mfxHDL pthis, mfxMemId mid, mfxFrameData *ptr)$/;"	f	file:
+free_buffer	qsvdec.c	/^static void free_buffer(void *opaque, uint8_t *data)$/;"	f	file:
+free_surfaces	qsvdec.c	/^static void free_surfaces(DecodeContext *decode)$/;"	f	file:
+get_audio_frame	muxing.c	/^static AVFrame *get_audio_frame(OutputStream *ost)$/;"	f	file:
+get_buffer	qsvdec.c	/^static int get_buffer(AVCodecContext *avctx, AVFrame *frame, int flags)$/;"	f	file:
+get_error_text	transcode_aac.c	/^static const char *get_error_text(const int error)$/;"	f	file:
+get_format	qsvdec.c	/^static int get_format(AVCodecContext *avctx, const enum AVPixelFormat *pix_fmts)$/;"	f	file:
+get_format_from_sample_fmt	demuxing_decoding.c	/^static int get_format_from_sample_fmt(const char **fmt,$/;"	f	file:
+get_format_from_sample_fmt	resampling_audio.c	/^static int get_format_from_sample_fmt(const char **fmt,$/;"	f	file:
+get_input	filter_audio.c	/^static int get_input(AVFrame *frame, int frame_num)$/;"	f	file:
+get_video_frame	muxing.c	/^static AVFrame *get_video_frame(OutputStream *ost)$/;"	f	file:
+height	demuxing_decoding.c	/^static int width, height;$/;"	v	file:
+ifmt_ctx	transcoding.c	/^static AVFormatContext *ifmt_ctx;$/;"	v	file:
+init_converted_samples	transcode_aac.c	/^static int init_converted_samples(uint8_t ***converted_input_samples,$/;"	f	file:
+init_fifo	transcode_aac.c	/^static int init_fifo(AVAudioFifo **fifo, AVCodecContext *output_codec_context)$/;"	f	file:
+init_filter	transcoding.c	/^static int init_filter(FilteringContext* fctx, AVCodecContext *dec_ctx,$/;"	f	file:
+init_filter_graph	filter_audio.c	/^static int init_filter_graph(AVFilterGraph **graph, AVFilterContext **src,$/;"	f	file:
+init_filters	filtering_audio.c	/^static int init_filters(const char *filters_descr)$/;"	f	file:
+init_filters	filtering_video.c	/^static int init_filters(const char *filters_descr)$/;"	f	file:
+init_filters	transcoding.c	/^static int init_filters(void)$/;"	f	file:
+init_input_frame	transcode_aac.c	/^static int init_input_frame(AVFrame **frame)$/;"	f	file:
+init_output_frame	transcode_aac.c	/^static int init_output_frame(AVFrame **frame,$/;"	f	file:
+init_packet	transcode_aac.c	/^static void init_packet(AVPacket *packet)$/;"	f	file:
+init_resampler	transcode_aac.c	/^static int init_resampler(AVCodecContext *input_codec_context,$/;"	f	file:
+last_pts	filtering_video.c	/^static int64_t last_pts = AV_NOPTS_VALUE;$/;"	v	file:
+list_op	avio_dir_cmd.c	/^static int list_op(const char *input_dir)$/;"	f	file:
+load_encode_and_write	transcode_aac.c	/^static int load_encode_and_write(AVAudioFifo *fifo,$/;"	f	file:
+log_packet	muxing.c	/^static void log_packet(const AVFormatContext *fmt_ctx, const AVPacket *pkt)$/;"	f	file:
+log_packet	remuxing.c	/^static void log_packet(const AVFormatContext *fmt_ctx, const AVPacket *pkt, const char *tag)$/;"	f	file:
+main	avio_dir_cmd.c	/^int main(int argc, char *argv[])$/;"	f
+main	avio_reading.c	/^int main(int argc, char *argv[])$/;"	f
+main	decoding_encoding.c	/^int main(int argc, char **argv)$/;"	f
+main	demuxing_decoding.c	/^int main (int argc, char **argv)$/;"	f
+main	extract_mvs.c	/^int main(int argc, char **argv)$/;"	f
+main	filter_audio.c	/^int main(int argc, char *argv[])$/;"	f
+main	filtering_audio.c	/^int main(int argc, char **argv)$/;"	f
+main	filtering_video.c	/^int main(int argc, char **argv)$/;"	f
+main	http_multiclient.c	/^int main(int argc, char **argv)$/;"	f
+main	metadata.c	/^int main (int argc, char **argv)$/;"	f
+main	muxing.c	/^int main(int argc, char **argv)$/;"	f
+main	qsvdec.c	/^int main(int argc, char **argv)$/;"	f
+main	remuxing.c	/^int main(int argc, char **argv)$/;"	f
+main	resampling_audio.c	/^int main(int argc, char **argv)$/;"	f
+main	scaling_video.c	/^int main(int argc, char **argv)$/;"	f
+main	transcode_aac.c	/^int main(int argc, char **argv)$/;"	f
+main	transcoding.c	/^int main(int argc, char **argv)$/;"	f
+maxiteration	decoder_targeted.c	/^const uint32_t maxiteration = 8096;$/;"	v
+mfx_session	qsvdec.c	/^    mfxSession mfx_session;$/;"	m	struct:DecodeContext	file:
+move_op	avio_dir_cmd.c	/^static int move_op(const char *src, const char *dst)$/;"	f	file:
+nb_surfaces	qsvdec.c	/^    int       nb_surfaces;$/;"	m	struct:DecodeContext	file:
+next_pts	muxing.c	/^    int64_t next_pts;$/;"	m	struct:OutputStream	file:
+ofmt_ctx	transcoding.c	/^static AVFormatContext *ofmt_ctx;$/;"	v	file:
+open_audio	muxing.c	/^static void open_audio(AVFormatContext *oc, AVCodec *codec, OutputStream *ost, AVDictionary *opt_arg)$/;"	f	file:
+open_codec_context	demuxing_decoding.c	/^static int open_codec_context(int *stream_idx,$/;"	f	file:
+open_codec_context	extract_mvs.c	/^static int open_codec_context(int *stream_idx,$/;"	f	file:
+open_input_file	filtering_audio.c	/^static int open_input_file(const char *filename)$/;"	f	file:
+open_input_file	filtering_video.c	/^static int open_input_file(const char *filename)$/;"	f	file:
+open_input_file	transcode_aac.c	/^static int open_input_file(const char *filename,$/;"	f	file:
+open_input_file	transcoding.c	/^static int open_input_file(const char *filename)$/;"	f	file:
+open_output_file	transcode_aac.c	/^static int open_output_file(const char *filename,$/;"	f	file:
+open_output_file	transcoding.c	/^static int open_output_file(const char *filename)$/;"	f	file:
+open_video	muxing.c	/^static void open_video(AVFormatContext *oc, AVCodec *codec, OutputStream *ost, AVDictionary *opt_arg)$/;"	f	file:
+pgm_save	decoding_encoding.c	/^static void pgm_save(unsigned char *buf, int wrap, int xsize, int ysize,$/;"	f	file:
+pix_fmt	demuxing_decoding.c	/^static enum AVPixelFormat pix_fmt;$/;"	v	typeref:enum:AVPixelFormat	file:
+pkt	demuxing_decoding.c	/^static AVPacket pkt;$/;"	v	file:
+pkt	extract_mvs.c	/^static AVPacket pkt;$/;"	v	file:
+player	filtering_audio.c	/^static const char *player       = "ffplay -f s16le -ar 8000 -ac 1 -";$/;"	v	file:
+print_frame	filtering_audio.c	/^static void print_frame(const AVFrame *frame)$/;"	f	file:
+process_client	http_multiclient.c	/^void process_client(AVIOContext *client, const char *in_uri)$/;"	f
+process_output	filter_audio.c	/^static int process_output(struct AVMD5 *md5, AVFrame *frame)$/;"	f	file:
+ptr	avio_reading.c	/^    uint8_t *ptr;$/;"	m	struct:buffer_data	file:
+pts	transcode_aac.c	/^static int64_t pts = 0;$/;"	v	file:
+read_decode_convert_and_store	transcode_aac.c	/^static int read_decode_convert_and_store(AVAudioFifo *fifo,$/;"	f	file:
+read_packet	avio_reading.c	/^static int read_packet(void *opaque, uint8_t *buf, int buf_size)$/;"	f	file:
+refcount	demuxing_decoding.c	/^static int refcount = 0;$/;"	v	file:
+samples_count	muxing.c	/^    int samples_count;$/;"	m	struct:OutputStream	file:
+select_channel_layout	decoding_encoding.c	/^static int select_channel_layout(AVCodec *codec)$/;"	f	file:
+select_sample_rate	decoding_encoding.c	/^static int select_sample_rate(AVCodec *codec)$/;"	f	file:
+size	avio_reading.c	/^    size_t size; \/\/\/< size left in the buffer$/;"	m	struct:buffer_data	file:
+size_	decoder_targeted.c	/^    size_t size_;$/;"	m	struct:FuzzDataBuffer	file:
+src_filename	demuxing_decoding.c	/^static const char *src_filename = NULL;$/;"	v	file:
+src_filename	extract_mvs.c	/^static const char *src_filename = NULL;$/;"	v	file:
+st	muxing.c	/^    AVStream *st;$/;"	m	struct:OutputStream	file:
+subtitle_handler	decoder_targeted.c	/^static int subtitle_handler(AVCodecContext *avctx, void *frame,$/;"	f	file:
+surface_ids	qsvdec.c	/^    mfxMemId    *surface_ids;$/;"	m	struct:DecodeContext	file:
+surface_used	qsvdec.c	/^    int         *surface_used;$/;"	m	struct:DecodeContext	file:
+surfaces	qsvdec.c	/^    VASurfaceID *surfaces;$/;"	m	struct:DecodeContext	file:
+swr_ctx	muxing.c	/^    struct SwrContext *swr_ctx;$/;"	m	struct:OutputStream	typeref:struct:OutputStream::SwrContext	file:
+sws_ctx	muxing.c	/^    struct SwsContext *sws_ctx;$/;"	m	struct:OutputStream	typeref:struct:OutputStream::SwsContext	file:
+t	muxing.c	/^    float t, tincr, tincr2;$/;"	m	struct:OutputStream	file:
+tincr	muxing.c	/^    float t, tincr, tincr2;$/;"	m	struct:OutputStream	file:
+tincr2	muxing.c	/^    float t, tincr, tincr2;$/;"	m	struct:OutputStream	file:
+tmp_frame	muxing.c	/^    AVFrame *tmp_frame;$/;"	m	struct:OutputStream	file:
+type_string	avio_dir_cmd.c	/^static const char *type_string(int type)$/;"	f	file:
+usage	avio_dir_cmd.c	/^static void usage(const char *program_name)$/;"	f	file:
+va_dpy	qsvdec.c	/^    VADisplay va_dpy;$/;"	m	struct:DecodeContext	file:
+video_dec_ctx	demuxing_decoding.c	/^static AVCodecContext *video_dec_ctx = NULL, *audio_dec_ctx;$/;"	v	file:
+video_dec_ctx	extract_mvs.c	/^static AVCodecContext *video_dec_ctx = NULL;$/;"	v	file:
+video_decode_example	decoding_encoding.c	/^static void video_decode_example(const char *outfilename, const char *filename)$/;"	f	file:
+video_dst_bufsize	demuxing_decoding.c	/^static int video_dst_bufsize;$/;"	v	file:
+video_dst_data	demuxing_decoding.c	/^static uint8_t *video_dst_data[4] = {NULL};$/;"	v	file:
+video_dst_file	demuxing_decoding.c	/^static FILE *video_dst_file = NULL;$/;"	v	file:
+video_dst_filename	demuxing_decoding.c	/^static const char *video_dst_filename = NULL;$/;"	v	file:
+video_dst_linesize	demuxing_decoding.c	/^static int      video_dst_linesize[4];$/;"	v	file:
+video_encode_example	decoding_encoding.c	/^static void video_encode_example(const char *filename, int codec_id)$/;"	f	file:
+video_frame_count	demuxing_decoding.c	/^static int video_frame_count = 0;$/;"	v	file:
+video_frame_count	extract_mvs.c	/^static int video_frame_count = 0;$/;"	v	file:
+video_stream	demuxing_decoding.c	/^static AVStream *video_stream = NULL, *audio_stream = NULL;$/;"	v	file:
+video_stream	extract_mvs.c	/^static AVStream *video_stream = NULL;$/;"	v	file:
+video_stream_idx	demuxing_decoding.c	/^static int video_stream_idx = -1, audio_stream_idx = -1;$/;"	v	file:
+video_stream_idx	extract_mvs.c	/^static int video_stream_idx = -1;$/;"	v	file:
+video_stream_index	filtering_video.c	/^static int video_stream_index = -1;$/;"	v	file:
+width	demuxing_decoding.c	/^static int width, height;$/;"	v	file:
+write_audio_frame	muxing.c	/^static int write_audio_frame(AVFormatContext *oc, OutputStream *ost)$/;"	f	file:
+write_frame	muxing.c	/^static int write_frame(AVFormatContext *fmt_ctx, const AVRational *time_base, AVStream *st, AVPacket *pkt)$/;"	f	file:
+write_output_file_header	transcode_aac.c	/^static int write_output_file_header(AVFormatContext *output_format_context)$/;"	f	file:
+write_output_file_trailer	transcode_aac.c	/^static int write_output_file_trailer(AVFormatContext *output_format_context)$/;"	f	file:
+write_video_frame	muxing.c	/^static int write_video_frame(AVFormatContext *oc, OutputStream *ost)$/;"	f	file:
