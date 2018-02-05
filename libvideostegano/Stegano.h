@@ -25,7 +25,7 @@ public:
      * @param _videoFilePath address of video file
      * @return key error
      */
-    int openVideo(const std::string &_videoFilePath);
+    int openVideo(const std::string &_videoFilePath, const std::string &_outputFilePath="");
     /**
      * @brief getProgress returns progress of embedding process
      * @param _progress embedding process
@@ -67,7 +67,6 @@ private:
      * @brief pPrivate private object pointer
      */
     clsPrivateStegano *pPrivate;
-    AVPacket tmpPacket;
     std::string outputFileName;
     std::string inputFileName;
 

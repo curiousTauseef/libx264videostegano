@@ -3,10 +3,6 @@
 
 #include <string>
 #include <vector>
-extern "C"
-{
-#include <libavcodec/avcodec.h>
-}
 
 struct stuVideoInfo
 {
@@ -16,8 +12,8 @@ struct stuVideoInfo
     uint            duration=0;
     std::string     filePath;
     uint            frameCounts=0;
-    AVCodecID       videoCodecId;
-    AVCodecID       audioCodecId;
+    int             videoCodecId;
+    int             audioCodecId;
     uint            maximumCapacity=0;
     uint            numberOfStreams=0;
 

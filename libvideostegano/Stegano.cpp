@@ -67,25 +67,37 @@ int Stegano::embed(const std::string &_embedFilePath)
     this->pPrivate->info.messageLength = (*this->pPrivate->message)->length / 8; // byte
     char* startBitBoundary = clsPrivateStegano::startBit();
     memmove((*this->pPrivate->message)->body, startBitBoundary, START_BITS_COUNT * sizeof(char));
-
-//    this->pPrivate->message->width = this->pPrivate->demuxer.getWidth();
-//    this->pPrivate->message->height = this->pPrivate->demuxer.getHeight();
+    if((*this->pPrivate->message)->length > this->pPrivate->info.maximumCapacity) {
+        std::cerr << "This message can not be embedded in this video. Max capaciyt of this vide is " << this->pPrivate->info.maximumCapacity << " but this message length is " << (*this->pPrivate->message)->length << " bits" << std::endl;
+        return 4;
+    }
+    //    this->pPrivate->message->width = this->pPrivate->demuxer.getWidth();
+    //    this->pPrivate->message->height = this->pPrivate->demuxer.getHeight();
     return 0;
 }
 
-int Stegano::openVideo(const std::string &_videoFilePath)
+int Stegano::openVideo(const std::string &_videoFilePath, const std::string &_outputFilePath)
 {
-    if(this->pPrivate->isInitialized())
+    if(this->pPrivate->isInitialized()) {
+        this->inputFileName = _videoFilePath;
+        if(_outputFilePath.length() != 0)
+            this->outputFileName = _outputFilePath;
         return 0;
-    this->inputFileName = _videoFilePath;
-    uint indexExtension = _videoFilePath.find_last_of(".");
-    if(indexExtension < _videoFilePath.size()) {
-    outputFileName.insert(outputFileName.begin(), _videoFilePath.begin(), _videoFilePath.begin() + indexExtension);
-    outputFileName += "_embeded";
-    outputFileName.insert(outputFileName.end(), _videoFilePath.begin()+indexExtension, _videoFilePath.end());
-    } else {
-        outputFileName = "notSupported.mp4";
     }
+    this->inputFileName = _videoFilePath;
+    if (_outputFilePath.length() == 0) {
+        uint indexExtension = _videoFilePath.find_last_of(".");
+        if(indexExtension < _videoFilePath.size()) {
+            outputFileName.insert(outputFileName.begin(), _videoFilePath.begin(), _videoFilePath.begin() + indexExtension);
+            outputFileName += "_embeded";
+            outputFileName.insert(outputFileName.end(), _videoFilePath.begin()+indexExtension, _videoFilePath.end());
+        } else {
+            outputFileName = "notSupported.mp4";
+        }
+    } else {
+        outputFileName = _outputFilePath;
+    }
+
 
     if(unlink(outputFileName.c_str()) == 0)
         std::cout << "Output file " << outputFileName << " exists. It will be replaced with new one.";
@@ -100,21 +112,21 @@ int Stegano::openVideo(const std::string &_videoFilePath)
     srand(Stegano::key);
     int encodingProfileIndex = rand() % this->pPrivate->x264Encoder.encodingProfiles.size();
     AVFormatContext *inputVideoFormatContext = this->pPrivate->demuxer.getAvFormatContext();
-        int videoStreamIndex = this->pPrivate->demuxer.getVideoStreamIndex();
+    int videoStreamIndex = this->pPrivate->demuxer.getVideoStreamIndex();
     uint fps_num = inputVideoFormatContext->streams[videoStreamIndex]->r_frame_rate.num;
     uint fps_den = inputVideoFormatContext->streams[videoStreamIndex]->r_frame_rate.den;
     this->pPrivate->x264Encoder.init(this->pPrivate->demuxer.getWidth(), this->pPrivate->demuxer.getHeight(), fps_num, fps_den, encodingProfileIndex);
-//    if(_videoFilePath.find("rtsp") != 0)
-//        if(this->pPrivate->muxer.init(outputFileName.c_str(), this->pPrivate->demuxer.getAvFormatContext(), true) == false) {
-//            int ret = 2;
-//            errorStringVector[ret] = "Could not open output file: " +  outputFileName ;
-//            std::cerr << errorStringVector[ret] << std::endl;
-//            this->pPrivate->initialized = false;
-//            return ret;
-//        }
+    //    if(_videoFilePath.find("rtsp") != 0)
+    //        if(this->pPrivate->muxer.init(outputFileName.c_str(), this->pPrivate->demuxer.getAvFormatContext(), true) == false) {
+    //            int ret = 2;
+    //            errorStringVector[ret] = "Could not open output file: " +  outputFileName ;
+    //            std::cerr << errorStringVector[ret] << std::endl;
+    //            this->pPrivate->initialized = false;
+    //            return ret;
+    //        }
 
     AVPacket temp = this->pPrivate->x264Encoder.getAvpacket();
-//    this->pPrivate->muxer.writeFrame(temp);
+    //    this->pPrivate->muxer.writeFrame(temp);
     uint numberOfChannel = 3;
     this->pPrivate->decodedFrame = (unsigned char*)malloc(this->pPrivate->demuxer.getWidth()*this->pPrivate->demuxer.getHeight()*numberOfChannel);
     this->pPrivate->message = &this->pPrivate->x264Encoder.message;
@@ -160,6 +172,7 @@ void Stegano::getProgress(float **_progress)
 void Stegano::getInfo(stuVideoInfo **_info)
 {
     int capacity = this->getCapacity();
+//    int capacity=10000000;
     std::cout << "Capacity: " << capacity << std::endl;
     this->pPrivate->info.maximumCapacity = capacity;
     *_info = &this->pPrivate->info;
@@ -180,7 +193,7 @@ int Stegano::getCapacity()
                 std::cerr << "Could not decode one frame." << std::endl;
                 continue;
             }
-          frameNumber++;
+            frameNumber++;
         } else {
             continue;
         }
@@ -188,9 +201,9 @@ int Stegano::getCapacity()
         if(frameNumber >= this->pPrivate->info.frameCounts/part && this->pPrivate->info.frameCounts != 0)
             break;
     }
-//    this->pPrivate->demuxer.reinit();
-//    this->pPrivate->avMediaDecoder.reinit(this->pPrivate->demuxer.getAvFormatContext());
-//    this->pPrivate->x264Encoder.reinit();
+    //    this->pPrivate->demuxer.reinit();
+    //    this->pPrivate->avMediaDecoder.reinit(this->pPrivate->demuxer.getAvFormatContext());
+    //    this->pPrivate->x264Encoder.reinit();
     (*this->pPrivate->message)->gettingCapacity = 0;
     int numberOfEmbeddedBits = 0;
     if(this->pPrivate->info.frameCounts != 0)
@@ -198,56 +211,56 @@ int Stegano::getCapacity()
     else
         numberOfEmbeddedBits = (*this->pPrivate->message)->numberOfEmbededBits;;
     (*this->pPrivate->message)->numberOfEmbededBits = 0;
-//    this->pPrivate->muxer.reinit(this->pPrivate->demuxer.getAvFormatContext());
-    return numberOfEmbeddedBits-int(0.05*numberOfEmbeddedBits);
+    //    this->pPrivate->muxer.reinit(this->pPrivate->demuxer.getAvFormatContext());
+    return numberOfEmbeddedBits-int(0.2*numberOfEmbeddedBits);
 }
 
 
 int Stegano::startEncoding()
 {
-//    int argc = 12;
-//    const char* tmpArgv[]={"embedding", "-i", , "-c:a", "copy", "-c:v", "libx264", "-tune", "zerolatency", "-preset", "veryfast", this->outputFileName.c_str()};
-//    char** argv2 = const_cast<char**>(tmpArgv);
+    //    int argc = 12;
+    //    const char* tmpArgv[]={"embedding", "-i", , "-c:a", "copy", "-c:v", "libx264", "-tune", "zerolatency", "-preset", "veryfast", this->outputFileName.c_str()};
+    //    char** argv2 = const_cast<char**>(tmpArgv);
     stuAvVideoInfo *videoInfo = new stuAvVideoInfo();
-//    videoInfo.audioCodecId = &this->pPrivate->info.audioCodecId;
+    //    videoInfo.audioCodecId = &this->pPrivate->info.audioCodecId;
     videoInfo->duration = &this->pPrivate->info.duration;
     videoInfo->fps = &this->pPrivate->info.fps;
     videoInfo->frameCounts=&this->pPrivate->info.frameCounts;
     videoInfo->height=&this->pPrivate->info.height;
     videoInfo->numberOfStreams=&this->pPrivate->info.numberOfStreams;
-//    videoInfo.videoCodecId=&this->pPrivate->info.videoCodecId;
+    //    videoInfo.videoCodecId=&this->pPrivate->info.videoCodecId;
     videoInfo->width=&this->pPrivate->info.width;
     (*this->pPrivate->message)->isSendingMessage = true;
     embedVideo(this->inputFileName.c_str(), this->outputFileName.c_str(), this->pPrivate->message, videoInfo);
-//    AVPacket avPacket;
-//    uint frameNumber = 0;
-//    bool firstTime = false;
-//    while(this->pPrivate->demuxer.getNextAvPacketFrame(avPacket)) {
-//        if(avPacket.stream_index == this->pPrivate->demuxer.getVideoStreamIndex()) { // if it's video decode it
-//            if(this->pPrivate->avMediaDecoder.decodeFrame(avPacket, this->pPrivate->decodedFrame) == false) {
-//                std::cerr << "Could not decode one frame." << std::endl;
-//                continue;
-//            }
-//        } else { // otherwise mux it to the container
-//            this->pPrivate->muxer.writeFrame(avPacket);
-//            continue;
-//        }
-//        AVPacket tmpPacket = this->pPrivate->x264Encoder.encodeFrame(this->pPrivate->decodedFrame);
-//        avPacket.data = tmpPacket.data;
-//        avPacket.size = tmpPacket.size;
-//        this->pPrivate->muxer.writeFrame(avPacket);
-//        float *progress;
-//        getProgress(&progress);
-//        if(frameNumber % 10 == 0)
-//            std::cout << "Progress is: " << *progress << std::endl;
-//        if(++frameNumber > this->pPrivate->maximumFrameNumber )
-//            break;
-//        if(this->pPrivate->message->isSendingMessage == false && firstTime == false) {
-//            std::cout << "Embeding was successfully done" << std::endl;
-//            firstTime = true;
-////            break;
-//        }
-//    }
+    //    AVPacket avPacket;
+    //    uint frameNumber = 0;
+    //    bool firstTime = false;
+    //    while(this->pPrivate->demuxer.getNextAvPacketFrame(avPacket)) {
+    //        if(avPacket.stream_index == this->pPrivate->demuxer.getVideoStreamIndex()) { // if it's video decode it
+    //            if(this->pPrivate->avMediaDecoder.decodeFrame(avPacket, this->pPrivate->decodedFrame) == false) {
+    //                std::cerr << "Could not decode one frame." << std::endl;
+    //                continue;
+    //            }
+    //        } else { // otherwise mux it to the container
+    //            this->pPrivate->muxer.writeFrame(avPacket);
+    //            continue;
+    //        }
+    //        AVPacket tmpPacket = this->pPrivate->x264Encoder.encodeFrame(this->pPrivate->decodedFrame);
+    //        avPacket.data = tmpPacket.data;
+    //        avPacket.size = tmpPacket.size;
+    //        this->pPrivate->muxer.writeFrame(avPacket);
+    //        float *progress;
+    //        getProgress(&progress);
+    //        if(frameNumber % 10 == 0)
+    //            std::cout << "Progress is: " << *progress << std::endl;
+    //        if(++frameNumber > this->pPrivate->maximumFrameNumber )
+    //            break;
+    //        if(this->pPrivate->message->isSendingMessage == false && firstTime == false) {
+    //            std::cout << "Embeding was successfully done" << std::endl;
+    //            firstTime = true;
+    ////            break;
+    //        }
+    //    }
     int ret = 0;
     if((*this->pPrivate->message)->isSendingMessage == true) {
         ret = 4;
@@ -257,8 +270,8 @@ int Stegano::startEncoding()
         ret = 10;
         errorStringVector[ret] = std::to_string((*this->pPrivate->message)->cursor);
     }
-//    this->pPrivate->muxer.close(this->pPrivate->x264Encoder.getPpsFrameLength(), this->pPrivate->x264Encoder.getSpsFrameLength(),
-//                                this->pPrivate->x264Encoder.getPpsFrame(), this->pPrivate->x264Encoder.getSpsFrame());
+    //    this->pPrivate->muxer.close(this->pPrivate->x264Encoder.getPpsFrameLength(), this->pPrivate->x264Encoder.getSpsFrameLength(),
+    //                                this->pPrivate->x264Encoder.getPpsFrame(), this->pPrivate->x264Encoder.getSpsFrame());
     return ret;
 }
 

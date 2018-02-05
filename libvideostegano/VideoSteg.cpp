@@ -39,12 +39,12 @@ int setKeyNumber(const char *_keyFilePath) {
     return ret;
 }
 
-int Embed(const char *inputFilePath, const char *messageFilePathOrMessageText, const char *keyFilePath, float **progress, void (*RPCallBack)(float))
+int Embed(const char *inputFilePath, const char *messageFilePathOrMessageText, const char *outputFilePath, const char *keyFilePath, float **progress, void (*RPCallBack)(float))
 {
     int ret = setKeyNumber(keyFilePath);
     if(ret != 0)
         return ret;
-    ret = stegano.openVideo(inputFilePath);
+    ret = stegano.openVideo(inputFilePath, outputFilePath);
     if(ret != 0)
         return ret;
     ret = stegano.embed(messageFilePathOrMessageText);

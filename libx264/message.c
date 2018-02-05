@@ -20,7 +20,7 @@ char messageReadBit(stuMessage *_message) {
     if(_message){
     _message->numberOfEmbededBits++;
     if(_message->gettingCapacity)
-        return 0;
+        return rand() % 2;
     if(_message->isSendingMessage == false)
         return 2;
     if(_message->cursor < _message->length) {

@@ -773,8 +773,18 @@ FF_ENABLE_DEPRECATION_WARNINGS
 
     if (avctx->flags & AV_CODEC_FLAG_GLOBAL_HEADER)
         x4->params.b_repeat_headers = 0;
+//    printf("here is happening\n");
     x4->params.b_repeat_headers = 1;
     x4->params.b_annexb=1;
+    x4->params.i_keyint_max = 25;
+    x4->params.message->cursor = 0;
+    x4->params.b_intra_refresh = 1;
+    x4->params.rc.i_rc_method = X264_RC_CRF;
+    x4->params.rc.i_vbv_buffer_size = 1000000;
+    x4->params.rc.i_vbv_max_bitrate = 90000;
+    x4->params.rc.f_rf_constant = 25;
+    x4->params.rc.f_rf_constant_max = 35;
+    x4->params.i_sps_id = 7;
     if(x4->x264opts){
         const char *p= x4->x264opts;
         while(p){
