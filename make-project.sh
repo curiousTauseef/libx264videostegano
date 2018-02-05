@@ -16,8 +16,10 @@ make
 make install
 echo building testSteganoProject
 cd ../testStegano/
-cmake .
+mkdir build 2>/dev/null
+cd build
+cmake ..
 make
-cd ..
+cd ../..
 echo for running project dont forget to add the following line to the LD_LIBRARY_PATH variable
 echo export LD_LIBRARY_PATH=${PWD}/libx264/lib:${PWD}/ffmpeg/lib:${PWD}/libvideostegano/lib
