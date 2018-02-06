@@ -1,5 +1,9 @@
 #!/bin/bash
 videoFileName=$1
+if [ ! -e "$videoFileName" ]; then
+    echo $videoFileName not found
+    exit
+fi
 extension=${videoFileName#*.}
 resultDir=${videoFileName}_result
 mkdir -p $resultDir 2>/dev/null
