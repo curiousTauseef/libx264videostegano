@@ -76,7 +76,10 @@ int FileAndMessageInfo(const char *inputFilePath, const char *messageFilePathOrM
     if(ret != 0)
         return ret;
     ret = stegano.embed(messageFilePathOrMessageText);
-
+    stegano.getProgress(progress);
+    if(RPCallBack != NULL) {
+        RPCallBack = [](float _progress){stegano.getProgress(_progress);};
+    }
 //    if(ret == 0 || ret == 9)
         stegano.getInfo(info);
     return ret;
