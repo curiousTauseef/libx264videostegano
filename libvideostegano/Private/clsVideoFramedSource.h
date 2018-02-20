@@ -2,7 +2,7 @@
 #define CLSVIDEOFRAMEDSOURCE_H
 
 #include <iostream>
-#include <liveMedia/FramedSource.hh>
+#include <FramedSource.hh>
 #include <queue>
 #include "clsDemuxer.h"
 #include "clsMuxer.h"
@@ -14,7 +14,7 @@ extern "C" {
 }
 
 
-#define SLEEP_BETWEEN_FRAMES 30000
+#define SLEEP_BETWEEN_FRAMES 3000
 
 class clsVideoFramedSource : public FramedSource
 {
@@ -37,8 +37,8 @@ private:
     static clsDemuxer *demuxer;
     static clsAvMediaDecoder *decoder;
     static clsX264Encoder *encoder;
-    static clsMuxer *muxer;
-    static stuMessage *message;
+//    static clsMuxer *muxer;
+    static stuMessage **message;
     x264_nal_t nalUnit;
     uint frameNumber;
     unsigned char* decodedFrame;

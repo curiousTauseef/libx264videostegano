@@ -35,5 +35,8 @@ int FileAndMessageInfo(const char * inputFilePath, const char * messageFilePathO
  * @param reportNumber key error
  * @param reportsStr human readable error
  */
+
+int EmbedNetworkStreaming(const char *inputFilePath, const char *messageFilePathOrMessageText, const char* keyFilePath, float **progress, void (*RPCallBack)(float prog) = NULL);
+
 void error2String(int reportNumber, std::string &reportsStr);
 #endif

@@ -91,3 +91,5 @@ rawMessage*
 results.csv
 testStegano
 *.cbp
+currentMaximumCapacity
+*.mp4

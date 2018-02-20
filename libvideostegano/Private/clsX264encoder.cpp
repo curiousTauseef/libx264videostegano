@@ -64,45 +64,45 @@ bool clsX264Encoder::init(int _width, int _height, uint _fps_num, uint _fps_denu
     picture_in.img.i_csp = X264_CSP_I420;
     // I have initilized my color space converter for BGR24 to YUV420 because my opencv video capture gives BGR24 image. You can initilize according to your input pixelFormat
     convertContext = sws_getContext(parameters.i_width,parameters.i_height, AV_PIX_FMT_RGB24, parameters.i_width,parameters.i_height,AV_PIX_FMT_YUV420P, SWS_FAST_BILINEAR, NULL, NULL, NULL);
-    if(parameters.b_repeat_headers) {
-        std::cout << "parameters.b_repeat_headers" << std::endl;
-        x264_nal_t* nals ;
-        int i_nals = 0;
-        int frame_size = -1;
-        uint cursor = 0;
-        frame_size = x264_encoder_headers(encoder, &nals, &i_nals);
-        this->avPacket.size = frame_size;
-        this->avPacket.data = (uint8_t*) malloc(frame_size * sizeof(uint8_t));
-        for(int i = 0; i< i_nals; i++) {
-            memcpy(this->avPacket.data + cursor, nals[i].p_payload, nals[i].i_payload);
-            unsigned char videoFrameType = nals[i].p_payload[4];
-            if (videoFrameType == 0x68)
-            {
-                if (ppsFrame != NULL)
-                {
-                    delete ppsFrame; ppsFrameLength = 0;
-                    ppsFrame = NULL;
-                }
-                ppsFrameLength = nals[i].i_payload;
-                ppsFrame = new unsigned char[ppsFrameLength];
-                memcpy(ppsFrame, nals[i].p_payload, ppsFrameLength);
-            }
-            else if (videoFrameType == 0x67)
-            {
-                // sps
-                if (spsFrame != NULL)
-                {
-                    delete spsFrame; spsFrameLength = 0;
-                    spsFrame = NULL;
-                }
-                spsFrameLength = nals[i].i_payload;
-                spsFrame = new unsigned char[spsFrameLength];
-                memcpy(spsFrame, nals[i].p_payload, spsFrameLength);
-            }
-            cursor += nals[i].i_payload;
-            output_queue.push(nals[i]);
-        }
-    }
+//    if(parameters.b_repeat_headers) {
+//        std::cout << "parameters.b_repeat_headers" << std::endl;
+//        x264_nal_t* nals ;
+//        int i_nals = 0;
+//        int frame_size = -1;
+//        uint cursor = 0;
+//        frame_size = x264_encoder_headers(encoder, &nals, &i_nals);
+//        this->avPacket.size = frame_size;
+//        this->avPacket.data = (uint8_t*) malloc(frame_size * sizeof(uint8_t));
+//        for(int i = 0; i< i_nals; i++) {
+//            memcpy(this->avPacket.data + cursor, nals[i].p_payload, nals[i].i_payload);
+//            unsigned char videoFrameType = nals[i].p_payload[4];
+//            if (videoFrameType == 0x68)
+//            {
+//                if (ppsFrame != NULL)
+//                {
+//                    delete ppsFrame; ppsFrameLength = 0;
+//                    ppsFrame = NULL;
+//                }
+//                ppsFrameLength = nals[i].i_payload;
+//                ppsFrame = new unsigned char[ppsFrameLength];
+//                memcpy(ppsFrame, nals[i].p_payload, ppsFrameLength);
+//            }
+//            else if (videoFrameType == 0x67)
+//            {
+//                // sps
+//                if (spsFrame != NULL)
+//                {
+//                    delete spsFrame; spsFrameLength = 0;
+//                    spsFrame = NULL;
+//                }
+//                spsFrameLength = nals[i].i_payload;
+//                spsFrame = new unsigned char[spsFrameLength];
+//                memcpy(spsFrame, nals[i].p_payload, spsFrameLength);
+//            }
+//            cursor += nals[i].i_payload;
+//            output_queue.push(nals[i]);
+//        }
+//    }
     this->initialized = true;
     return this->initialized;
 }

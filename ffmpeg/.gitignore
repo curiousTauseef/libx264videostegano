@@ -42,3 +42,7 @@ include
 
 
 *.user*
+share/doc/
+share/man/man1/ffplay-all.1
+share/man/man1/ffplay.1
+
