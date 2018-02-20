@@ -2735,12 +2735,12 @@ static int init_output_stream(OutputStream *ost, char *error, int error_len)
             x4->params.i_keyint_max = 25;
             x4->params.message->cursor = 0;
             x4->params.b_intra_refresh = 1;
-            x4->params.rc.i_rc_method = X264_RC_CRF;
-            x4->params.rc.i_vbv_buffer_size = 1000000;
-            x4->params.rc.i_vbv_max_bitrate = 90000;
-            x4->params.rc.f_rf_constant = 25;
-            x4->params.rc.f_rf_constant_max = 35;
-            x4->params.i_sps_id = 7;
+//            x4->params.rc.i_rc_method = X264_RC_CRF;
+//            x4->params.rc.i_vbv_buffer_size = 1000000;
+//            x4->params.rc.i_vbv_max_bitrate = 90000;
+//            x4->params.rc.f_rf_constant = 25;
+//            x4->params.rc.f_rf_constant_max = 35;
+//            x4->params.i_sps_id = 7;
             initializedMessage=1;
         }
         if (ost->enc->type == AVMEDIA_TYPE_AUDIO &&
