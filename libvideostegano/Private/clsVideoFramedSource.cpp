@@ -8,8 +8,8 @@ unsigned clsVideoFramedSource::referenceCount = 0;
 clsDemuxer *clsVideoFramedSource::demuxer = NULL;
 clsX264Encoder *clsVideoFramedSource::encoder = NULL;
 clsAvMediaDecoder *clsVideoFramedSource::decoder = NULL;
-clsMuxer *clsVideoFramedSource::muxer = NULL;
-stuMessage *clsVideoFramedSource::message = NULL;
+//clsMuxer *clsVideoFramedSource::muxer = NULL;
+stuMessage **clsVideoFramedSource::message = NULL;
 
 clsVideoFramedSource *clsVideoFramedSource::create(UsageEnvironment &_usageEnvironment)
 {
@@ -56,10 +56,9 @@ void clsVideoFramedSource::doGetNextFrame()
         if(this->frameNumber == SYNCING_FRAMES) {
             std::cout << "starting to send video" << std::endl;
             this->demuxer->reinit();
-            this->decoder->init(this->demuxer->getAvFormatContext());
-            this->muxer->init("notSupported.mp4", this->demuxer->getAvFormatContext(), true);
-            this->encoder->init(25, 1, this->demuxer->getWidth(), this->demuxer->getHeight());
-            this->message->isSendingMessage = true;
+            this->decoder->reinit(this->demuxer->getAvFormatContext());
+            this->encoder->reinit();
+            (*this->message)->isSendingMessage = true;
         }
         while(true) {
             playing = demuxer->getNextAvPacketFrame(avPacket);
@@ -80,16 +79,19 @@ void clsVideoFramedSource::doGetNextFrame()
         ptmpPacket = NULL;
         avPacket.data = tmpPacket.data;
         avPacket.size = tmpPacket.size;
-        this->muxer->writeFrame(avPacket);
+//        this->muxer->writeFrame(avPacket);
         gettimeofday(&currentTime, NULL);
         this->nalUnit = this->encoder->getNalUnit();
         usleep(SLEEP_BETWEEN_FRAMES);
     }
     if(this->nalUnit.i_payload == 0) {
-        this->muxer->close(this->encoder->getPpsFrameLength(), this->encoder->getSpsFrameLength(),
-                           this->encoder->getPpsFrame(), this->encoder->getSpsFrame());
+//        this->muxer->close(this->encoder->getPpsFrameLength(), this->encoder->getSpsFrameLength(),
+//                           this->encoder->getPpsFrame(), this->encoder->getSpsFrame());
         std::cerr << "Video is Done or what?" << std::endl;
-        return;
+        this->demuxer->reinit();
+        this->decoder->reinit(this->demuxer->getAvFormatContext());
+        this->encoder->reinit();
+//        return;
     }
     deliverFrame();
 }

@@ -212,7 +212,7 @@ int Stegano::getCapacity()
         numberOfEmbeddedBits = (*this->pPrivate->message)->numberOfEmbededBits;;
     (*this->pPrivate->message)->numberOfEmbededBits = 0;
     //    this->pPrivate->muxer.reinit(this->pPrivate->demuxer.getAvFormatContext());
-    return numberOfEmbeddedBits-int(0.2*numberOfEmbeddedBits);
+    return numberOfEmbeddedBits-int(0.3*numberOfEmbeddedBits);
 }
 
 
@@ -278,6 +278,9 @@ int Stegano::startEncoding()
 #if WITH_LIVEMEDIA
 void Stegano::startStreaming()
 {
+    this->pPrivate->demuxer.reinit();
+    this->pPrivate->avMediaDecoder.reinit(this->pPrivate->demuxer.getAvFormatContext());
+    this->pPrivate->x264Encoder.reinit();
     TaskScheduler* taskSchedular = BasicTaskScheduler::createNew();
     BasicUsageEnvironment* usageEnvironment = BasicUsageEnvironment::createNew(*taskSchedular);
     RTSPServer* rtspServer = RTSPServer::createNew(*usageEnvironment, 8554, NULL);
@@ -290,10 +293,10 @@ void Stegano::startStreaming()
     clsVideoFramedSource::encoder = &this->pPrivate->x264Encoder;
     clsVideoFramedSource::decoder = &this->pPrivate->avMediaDecoder;
     clsVideoFramedSource::demuxer = &this->pPrivate->demuxer;
-    clsVideoFramedSource::muxer   = &this->pPrivate->muxer;
+//    clsVideoFramedSource::muxer   = &this->pPrivate->muxer;
     clsVideoFramedSource::message = this->pPrivate->message;
 
-    this->pPrivate->message->isSendingMessage = false;
+    (*this->pPrivate->message)->isSendingMessage = false;
 
     sms->addSubsession(liveSubSession);
     rtspServer->addServerMediaSession(sms);

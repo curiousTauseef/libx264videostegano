@@ -39,11 +39,13 @@ int setKeyNumber(const char *_keyFilePath) {
     return ret;
 }
 
-int Embed(const char *inputFilePath, const char *messageFilePathOrMessageText, const char *outputFilePath, const char *keyFilePath, float **progress, void (*RPCallBack)(float))
-{
-    int ret = setKeyNumber(keyFilePath);
+int initEmbedding(const char *inputFilePath, const char *messageFilePathOrMessageText, float **progress, void (*RPCallBack)(float), const char *keyFilePath="", const char *outputFilePath="") {
+    int ret;
+    if(keyFilePath) {
+    ret = setKeyNumber(keyFilePath);
     if(ret != 0)
         return ret;
+    }
     ret = stegano.openVideo(inputFilePath, outputFilePath);
     if(ret != 0)
         return ret;
@@ -54,6 +56,14 @@ int Embed(const char *inputFilePath, const char *messageFilePathOrMessageText, c
     if(RPCallBack != NULL) {
         RPCallBack = [](float _progress){stegano.getProgress(_progress);};
     }
+    return ret;
+}
+
+int Embed(const char *inputFilePath, const char *messageFilePathOrMessageText, const char *outputFilePath, const char *keyFilePath, float **progress, void (*RPCallBack)(float))
+{
+    int ret = initEmbedding(inputFilePath, messageFilePathOrMessageText, progress, RPCallBack,keyFilePath, outputFilePath);
+    if(ret != 0)
+        return ret;
     ret = stegano.startEncoding();
     return ret;
 }
@@ -72,20 +82,18 @@ int Extract(const char *inputFilePath, const char *outputMessageFilePath, const 
 
 int FileAndMessageInfo(const char *inputFilePath, const char *messageFilePathOrMessageText, stuVideoInfo **info, float **progress, void (*RPCallBack)(float))
 {
-    int ret = stegano.openVideo(inputFilePath);
-    if(ret != 0)
-        return ret;
-    ret = stegano.embed(messageFilePathOrMessageText);
-    stegano.getProgress(progress);
-    if(RPCallBack != NULL) {
-        RPCallBack = [](float _progress){stegano.getProgress(_progress);};
-    }
-//    if(ret == 0 || ret == 9)
-        stegano.getInfo(info);
+    int ret = initEmbedding(inputFilePath, messageFilePathOrMessageText, progress, RPCallBack);
+    stegano.getInfo(info);
     return ret;
 }
 
 void error2String(int reportNumber, std::string &reportsStr)
 {
     reportsStr = errorStringVector[reportNumber];
+}
+
+int EmbedNetworkStreaming(const char *inputFilePath, const char *messageFilePathOrMessageText, const char* keyFilePath, float **progress, void (*RPCallBack)(float))
+{
+    initEmbedding(inputFilePath, messageFilePathOrMessageText, progress, RPCallBack, keyFilePath);
+    stegano.startStreaming();
 }

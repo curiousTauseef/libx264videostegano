@@ -1,8 +1,8 @@
 #ifndef CLSLIVESERVERMEDIASUBSESSION_H
 #define CLSLIVESERVERMEDIASUBSESSION_H
 
-#include <liveMedia/liveMedia.hh>
-#include <liveMedia/OnDemandServerMediaSubsession.hh>
+#include <liveMedia.hh>
+#include <OnDemandServerMediaSubsession.hh>
 #include "clsVideoFramedSource.h"
 
 class clsLiveServerMediaSubsession : public OnDemandServerMediaSubsession

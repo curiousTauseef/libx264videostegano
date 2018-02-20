@@ -83,7 +83,9 @@ int main(int argc, char *argv[])
         keyFs << 0;
     }
     keyFs.close();
-    if(hiddenFilePath.size() != 0 || outputFileName.length() != 0) {
+    if (doNetworkStreaming) {
+        EmbedNetworkStreaming(inputFileName.c_str(), hiddenFilePath.c_str(), keyFilePath.c_str(), &progress);
+    } else if(hiddenFilePath.size() != 0 || outputFileName.length() != 0) {
         if(inputFileName.length() == 0 || outputFileName.length() == 0)
             return usage(argv);
         stuVideoInfo *info;
