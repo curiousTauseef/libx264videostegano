@@ -1,6 +1,6 @@
 #!/bin/bash
 videoFileName=$1
-if [ ! -e "$videoFileName" ]; then
+if [ ! -f "$videoFileName" ]; then
     echo $videoFileName not found
     exit
 fi

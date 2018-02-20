@@ -31,13 +31,6 @@ include
 /ffplay
 /ffprobe
 /ffserver
-/config.*
-/coverage.info
-/avversion.h
-/lcov/
-/src
-/mapfile
-/tests
 *.user
 *.deb
 *.tgz
