@@ -215,6 +215,11 @@ int Stegano::getCapacity()
     return numberOfEmbeddedBits-int(0.3*numberOfEmbeddedBits);
 }
 
+void Stegano::dontEmbed()
+{
+    (*this->pPrivate->message)->isInitialized=0;
+}
+
 
 int Stegano::startEncoding()
 {
@@ -230,7 +235,8 @@ int Stegano::startEncoding()
     videoInfo->numberOfStreams=&this->pPrivate->info.numberOfStreams;
     //    videoInfo.videoCodecId=&this->pPrivate->info.videoCodecId;
     videoInfo->width=&this->pPrivate->info.width;
-    (*this->pPrivate->message)->isSendingMessage = true;
+    if ((*this->pPrivate->message)->isInitialized)
+        (*this->pPrivate->message)->isSendingMessage = true;
     embedVideo(this->inputFileName.c_str(), this->outputFileName.c_str(), this->pPrivate->message, videoInfo);
     //    AVPacket avPacket;
     //    uint frameNumber = 0;

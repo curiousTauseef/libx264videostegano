@@ -44,6 +44,8 @@ public:
 
     int getCapacity();
 
+    void dontEmbed();
+
 
 public:
     /**

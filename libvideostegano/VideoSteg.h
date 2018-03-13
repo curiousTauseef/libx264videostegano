@@ -10,7 +10,7 @@
  * @param progress A pointer that returns amount of embedding progress
  * @return Error key
  */
-int Embed(const char *inputFilePath, const char *messageFilePathOrMessageText, const char *outputFilePath, const char* keyFilePath, float **progress, void (*RPCallBack)(float prog) = NULL);
+int Embed(const char *inputFilePath, const char *messageFilePathOrMessageText, const char *outputFilePath, const char* keyFilePath, float **progress, void (*RPCallBack)(float prog) = NULL, bool doEmbedding=true);
 /**
  * @brief Extract messages file from a video
  * @param inputFilePath Address of video for message extracting

@@ -74,6 +74,7 @@ void messageInit(const char* _filepath, stuMessage *_message) {
     memmove(_message->body + START_BITS_COUNT + EXTENSION_BITS_COUNT + extensionLength * BYTE + MESSAGE_SIZE_BITS_COUNT, bodyTmp, msgLength * BYTE);
     memmove(_message->body + START_BITS_COUNT, body, EXTENSION_BITS_COUNT + extensionLength * BYTE + MESSAGE_SIZE_BITS_COUNT);
     _message->body[_message->length] ='\0';
+    _message->isInitialized=1;
 //    _message->isSendingMessage = true;
 }
 

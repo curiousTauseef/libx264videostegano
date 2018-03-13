@@ -12,6 +12,7 @@ std::string outputFileName;
 std::string hiddenFilePath = "";
 std::string keyFilePath = "defaultKey.k";
 std::string outputMessageFilePath = "message";
+bool doEmbedding = true;
 int key = 0;
 
 int usage(char** argv) {
@@ -20,6 +21,7 @@ int usage(char** argv) {
                                         "-o <output message file>(Optional: Address of output stored message, Default: message.xxx) \n"
                                         "-k <keyFileAddress>(optional: Address of key file)\n"
                                         "-h <Address of stegano file>(Required if you want to embed a file)\n"
+                                        "-e (Optional) don't embed anything to the video\n"
                                         "-n(Optional: Stream video over network )"  << std::endl;
     return 1;
 }
@@ -30,10 +32,13 @@ int inputParser (int argc, char** argv) {
     opterr = 0;
     int c;
 
-    while((c = getopt(argc, argv, "ni:h:k:o:v:")) != -1) {
+    while((c = getopt(argc, argv, "eni:h:k:o:v:")) != -1) {
         switch (c) {
         case 'n':
             doNetworkStreaming = true;
+            break;
+        case 'e':
+            doEmbedding = false;
             break;
         case 'i':
             inputFileName.assign(optarg);
@@ -91,7 +96,7 @@ int main(int argc, char *argv[])
         stuVideoInfo *info;
         FileAndMessageInfo(inputFileName.c_str(), hiddenFilePath.c_str(), &info, &progress);
         std::cout << info->toString() << std::endl;
-        int ret = Embed(inputFileName.c_str(), hiddenFilePath.c_str(), outputFileName.c_str(), keyFilePath.c_str(), &progress);
+        int ret = Embed(inputFileName.c_str(), hiddenFilePath.c_str(), outputFileName.c_str(), keyFilePath.c_str(), &progress, NULL, doEmbedding);
         std::string err;
         error2String(ret, err);
         std::cout <<info->filePath << "," << info->width << "," <<
