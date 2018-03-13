@@ -59,11 +59,13 @@ int initEmbedding(const char *inputFilePath, const char *messageFilePathOrMessag
     return ret;
 }
 
-int Embed(const char *inputFilePath, const char *messageFilePathOrMessageText, const char *outputFilePath, const char *keyFilePath, float **progress, void (*RPCallBack)(float))
+int Embed(const char *inputFilePath, const char *messageFilePathOrMessageText, const char *outputFilePath, const char *keyFilePath, float **progress, void (*RPCallBack)(float), bool doEmbedding)
 {
     int ret = initEmbedding(inputFilePath, messageFilePathOrMessageText, progress, RPCallBack,keyFilePath, outputFilePath);
     if(ret != 0)
         return ret;
+    if (doEmbedding==false)
+        stegano.dontEmbed();
     ret = stegano.startEncoding();
     return ret;
 }
