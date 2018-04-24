@@ -4437,11 +4437,20 @@ int embedVideo(const char* inputFile, const char* outputFile, stuMessage** _mess
     /* parse options and open all input/output files */
     ret = ffmpeg_parse_options(argc, argv);
     *info->duration = input_files[0]->ctx->duration;
-    *info->fps = input_files[0]->ctx->streams[0]->r_frame_rate.num/input_files[0]->ctx->streams[0]->r_frame_rate.den;
-    *info->frameCounts = input_files[0]->ctx->streams[0]->nb_frames;
-    *info->height = input_files[0]->ctx->streams[0]->codec->height;
-    *info->width = input_files[0]->ctx->streams[0]->codec->width;
     *info->numberOfStreams = input_files[0]->nb_streams;
+    int i=0;
+    for(i=0; i<*info->numberOfStreams; ++i){
+        if(input_files[0]->ctx->streams[i]->r_frame_rate.den!=0)
+            break;
+    }
+    if(input_files[0]->ctx->streams[i]->r_frame_rate.den==0){
+        printf("Could not found fps for this stream!!\n");
+    } else {
+        *info->fps = input_files[0]->ctx->streams[i]->r_frame_rate.num/input_files[0]->ctx->streams[i]->r_frame_rate.den;
+        *info->frameCounts = input_files[0]->ctx->streams[i]->nb_frames;
+        *info->height = input_files[0]->ctx->streams[i]->codec->height;
+        *info->width = input_files[0]->ctx->streams[i]->codec->width;
+    }
     if (ret < 0)
         exit_program(1);
 
