@@ -91,6 +91,9 @@ void clsVideoFramedSource::doGetNextFrame()
         this->demuxer->reinit();
         this->decoder->reinit(this->demuxer->getAvFormatContext());
         this->encoder->reinit();
+        (*this->message)->isSendingMessage = true;
+        (*this->message)->cursor=0;
+        (*this->message)->frameNumber=0;
 //        return;
     }
     deliverFrame();

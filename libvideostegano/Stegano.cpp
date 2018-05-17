@@ -223,50 +223,17 @@ void Stegano::dontEmbed()
 
 int Stegano::startEncoding()
 {
-    //    int argc = 12;
-    //    const char* tmpArgv[]={"embedding", "-i", , "-c:a", "copy", "-c:v", "libx264", "-tune", "zerolatency", "-preset", "veryfast", this->outputFileName.c_str()};
-    //    char** argv2 = const_cast<char**>(tmpArgv);
     stuAvVideoInfo *videoInfo = new stuAvVideoInfo();
-    //    videoInfo.audioCodecId = &this->pPrivate->info.audioCodecId;
     videoInfo->duration = &this->pPrivate->info.duration;
     videoInfo->fps = &this->pPrivate->info.fps;
     videoInfo->frameCounts=&this->pPrivate->info.frameCounts;
     videoInfo->height=&this->pPrivate->info.height;
     videoInfo->numberOfStreams=&this->pPrivate->info.numberOfStreams;
-    //    videoInfo.videoCodecId=&this->pPrivate->info.videoCodecId;
     videoInfo->width=&this->pPrivate->info.width;
     if ((*this->pPrivate->message)->isInitialized)
         (*this->pPrivate->message)->isSendingMessage = true;
     embedVideo(this->inputFileName.c_str(), this->outputFileName.c_str(), this->pPrivate->message, videoInfo);
-    //    AVPacket avPacket;
-    //    uint frameNumber = 0;
-    //    bool firstTime = false;
-    //    while(this->pPrivate->demuxer.getNextAvPacketFrame(avPacket)) {
-    //        if(avPacket.stream_index == this->pPrivate->demuxer.getVideoStreamIndex()) { // if it's video decode it
-    //            if(this->pPrivate->avMediaDecoder.decodeFrame(avPacket, this->pPrivate->decodedFrame) == false) {
-    //                std::cerr << "Could not decode one frame." << std::endl;
-    //                continue;
-    //            }
-    //        } else { // otherwise mux it to the container
-    //            this->pPrivate->muxer.writeFrame(avPacket);
-    //            continue;
-    //        }
-    //        AVPacket tmpPacket = this->pPrivate->x264Encoder.encodeFrame(this->pPrivate->decodedFrame);
-    //        avPacket.data = tmpPacket.data;
-    //        avPacket.size = tmpPacket.size;
-    //        this->pPrivate->muxer.writeFrame(avPacket);
-    //        float *progress;
-    //        getProgress(&progress);
-    //        if(frameNumber % 10 == 0)
-    //            std::cout << "Progress is: " << *progress << std::endl;
-    //        if(++frameNumber > this->pPrivate->maximumFrameNumber )
-    //            break;
-    //        if(this->pPrivate->message->isSendingMessage == false && firstTime == false) {
-    //            std::cout << "Embeding was successfully done" << std::endl;
-    //            firstTime = true;
-    ////            break;
-    //        }
-    //    }
+
     int ret = 0;
     if((*this->pPrivate->message)->isSendingMessage == true) {
         ret = 4;
@@ -276,8 +243,7 @@ int Stegano::startEncoding()
         ret = 10;
         errorStringVector[ret] = std::to_string((*this->pPrivate->message)->cursor);
     }
-    //    this->pPrivate->muxer.close(this->pPrivate->x264Encoder.getPpsFrameLength(), this->pPrivate->x264Encoder.getSpsFrameLength(),
-    //                                this->pPrivate->x264Encoder.getPpsFrame(), this->pPrivate->x264Encoder.getSpsFrame());
+
     return ret;
 }
 

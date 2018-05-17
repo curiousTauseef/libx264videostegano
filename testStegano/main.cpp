@@ -22,7 +22,7 @@ int usage(char** argv) {
                                         "-k <keyFileAddress>(optional: Address of key file)\n"
                                         "-h <Address of stegano file>(Required if you want to embed a file)\n"
                                         "-e (Optional) don't embed anything to the video\n"
-                                        "-n(Optional: Stream video over network )"  << std::endl;
+                                        "-n (Optional: Stream video over network )"  << std::endl;
     return 1;
 }
 
