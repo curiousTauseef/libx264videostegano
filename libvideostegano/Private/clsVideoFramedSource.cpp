@@ -71,6 +71,11 @@ void clsVideoFramedSource::doGetNextFrame()
             this->decoder->decodeFrame(avPacket, decodedFrame);
     }
     if(playing) {
+        if(this->frameNumber>SYNCING_FRAMES && (*this->message)->isSendingMessage==false){
+            (*this->message)->isSendingMessage = true;
+            (*this->message)->cursor=0;
+            (*this->message)->frameNumber=0;
+        }
         AVPacket tmpPacket = this->encoder->encodeFrame(decodedFrame);
         AVPacket *ptmpPacket = &tmpPacket;
         av_packet_unref(ptmpPacket);
