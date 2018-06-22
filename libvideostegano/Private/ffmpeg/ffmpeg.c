@@ -4407,10 +4407,10 @@ static void log_callback_null(void *ptr, int level, const char *fmt, va_list vl)
 
 int embedVideo(const char* inputFile, const char* outputFile, stuMessage** _message, stuAvVideoInfo *_info)
 {
-    const char* argv[]={"embedding", "-i", inputFile, "-c:a", "copy", "-c:v", "libx264", "-tune", "zerolatency", "-preset", "veryfast", outputFile};
+    const char* argv[]={"embedding", "-i", inputFile, "-c:a", "copy", "-c:v", "libx264", "-preset", "veryfast", outputFile};
     info = _info;
     //    char** argv = const_cast<char**>(tmpArgv);
-    int argc=12;
+    int argc=10;
     message = _message;
     int ret;
     int64_t ti;
