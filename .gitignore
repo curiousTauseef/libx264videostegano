@@ -1,1 +1,7 @@
 streaming/
+res
+*.rar
+*.avi
+*.txt
+*.h264
+*.mkv
