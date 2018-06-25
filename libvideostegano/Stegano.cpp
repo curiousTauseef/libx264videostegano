@@ -212,7 +212,7 @@ int Stegano::getCapacity()
         numberOfEmbeddedBits = (*this->pPrivate->message)->numberOfEmbededBits;;
     (*this->pPrivate->message)->numberOfEmbededBits = 0;
     //    this->pPrivate->muxer.reinit(this->pPrivate->demuxer.getAvFormatContext());
-    return numberOfEmbeddedBits-int(0.3*numberOfEmbeddedBits);
+    return numberOfEmbeddedBits-int(0.85*numberOfEmbeddedBits);
 }
 
 void Stegano::dontEmbed()
